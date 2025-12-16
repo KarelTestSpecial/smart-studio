@@ -26,6 +26,7 @@ export default function App() {
   });
 
   const [currentView, setCurrentView] = useState('dashboard');
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [editingLead, setEditingLead] = useState<Lead | null>(null);
 
@@ -145,10 +146,18 @@ export default function App() {
     <div className="flex min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-blue-500/30">
       {showConfetti && <Confetti />}
 
-      <Sidebar currentView={currentView} onChangeView={setCurrentView} />
+      <Sidebar
+        currentView={currentView}
+        onChangeView={setCurrentView}
+        isCollapsed={isSidebarCollapsed}
+        toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+      />
 
-      <main className="flex-1 min-w-0 ml-20 md:ml-56 p-4 md:p-8 transition-all duration-300">
-        <div className="max-w-7xl mx-auto h-full">
+      <main
+        className={`flex-1 min-w-0 p-4 md:p-8 transition-all duration-300 ${isSidebarCollapsed ? 'ml-20' : 'ml-20 md:ml-56'
+          }`}
+      >
+        <div className="max-w-7xl h-full">
           <AnimatePresence mode="wait">
             {currentView === 'dashboard' && (
               <motion.div
