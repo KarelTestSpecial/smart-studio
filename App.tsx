@@ -147,7 +147,7 @@ export default function App() {
       
       <Sidebar currentView={currentView} onChangeView={setCurrentView} />
 
-      <main className="flex-1 ml-20 md:ml-56 p-4 md:p-8 transition-all duration-300">
+      <main className="flex-1 min-w-0 ml-20 md:ml-56 p-4 md:p-8 transition-all duration-300">
         <div className="max-w-7xl mx-auto h-full">
           <AnimatePresence mode="wait">
             {currentView === 'dashboard' && (
