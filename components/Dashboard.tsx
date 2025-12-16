@@ -59,7 +59,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ leads, onAddLead, onSelect
           const isWon = col.id === 'WON';
 
           return (
-            <div key={col.id} className="flex flex-col h-full min-w-[300px]">
+            <div key={col.id} className="flex flex-col h-full w-full sm:min-w-[300px]">
               {/* Column Header */}
               <div className="flex items-center mb-4 px-1 gap-3">
                 {/* Title Group */}
