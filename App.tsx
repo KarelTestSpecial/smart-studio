@@ -28,7 +28,7 @@ export default function App() {
   const [currentView, setCurrentView] = useState('dashboard');
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [editingLead, setEditingLead] = useState<Lead | null>(null);
-  
+
   const [selectedLeadForChecklist, setSelectedLeadForChecklist] = useState<Lead | null>(null);
   const [selectedLeadForDetails, setSelectedLeadForDetails] = useState<Lead | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -42,9 +42,9 @@ export default function App() {
       // Update existing
       setData((prev) => ({
         ...prev,
-        leads: prev.leads.map((l) => 
-          l.id === editingLead.id 
-            ? { ...l, ...leadData } 
+        leads: prev.leads.map((l) =>
+          l.id === editingLead.id
+            ? { ...l, ...leadData }
             : l
         ),
       }));
@@ -86,12 +86,12 @@ export default function App() {
 
   const handleLeadAction = (lead: Lead) => {
     setSelectedLeadForDetails(null);
-    
+
     if (lead.status === 'NEW') {
-       setCurrentView('outreach');
+      setCurrentView('outreach');
     } else if (lead.status === 'CONTACTED') {
-       // Now redirects to the new Compliance workspace instead of opening the modal directly
-       setCurrentView('compliance');
+      // Now redirects to the new Compliance workspace instead of opening the modal directly
+      setCurrentView('compliance');
     }
     // Won leads just stay on dashboard/details for now
   };
@@ -104,13 +104,13 @@ export default function App() {
       setTimeout(() => setShowConfetti(false), 5000);
     }
   };
-  
+
   // This is used by the ComplianceManager component
   const handleWinDealFromManager = (id: string, status: LeadStatus) => {
     updateLeadStatus(id, status);
     if (status === 'WON') {
-        setShowConfetti(true);
-        setTimeout(() => setShowConfetti(false), 5000);
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 5000);
     }
   };
 
@@ -144,10 +144,10 @@ export default function App() {
   return (
     <div className="flex min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-blue-500/30">
       {showConfetti && <Confetti />}
-      
+
       <Sidebar currentView={currentView} onChangeView={setCurrentView} />
 
-      <main className="flex-1 min-w-0 ml-20 md:ml-56 p-4 md:p-8 transition-all duration-300 bg-red-500">
+      <main className="flex-1 min-w-0 ml-20 md:ml-56 p-4 md:p-8 transition-all duration-300">
         <div className="max-w-7xl mx-auto h-full">
           <AnimatePresence mode="wait">
             {currentView === 'dashboard' && (
@@ -193,9 +193,9 @@ export default function App() {
                 transition={{ duration: 0.2 }}
                 className="h-full"
               >
-                <ComplianceManager 
-                    leads={data.leads}
-                    onUpdateStatus={handleWinDealFromManager}
+                <ComplianceManager
+                  leads={data.leads}
+                  onUpdateStatus={handleWinDealFromManager}
                 />
               </motion.div>
             )}

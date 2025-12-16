@@ -53,7 +53,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ leads, onAddLead, onSelect
       </div>
 
       {/* Kanban Board */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full overflow-x-auto pb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 h-full overflow-x-auto pb-4">
         {columns.map((col) => {
           const columnLeads = getLeadsByStatus(col.id);
           const isWon = col.id === 'WON';
@@ -103,15 +103,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ leads, onAddLead, onSelect
                       exit={{ opacity: 0, scale: 0.95 }}
                       whileHover={{ scale: 1.02 }}
                       onClick={() => onSelectLead(lead)}
-                      className={`group cursor-pointer px-4 py-3 rounded-lg border transition-all duration-200 shadow-md relative overflow-hidden flex items-center justify-between gap-3 ${
-                         isWon 
-                         ? 'bg-slate-900/60 border-emerald-900/30 hover:border-emerald-500/50' 
-                         : 'bg-slate-800/40 border-slate-700/50 hover:bg-slate-800/60 hover:border-blue-500/30'
-                      }`}
+                      className={`group cursor-pointer px-4 py-3 rounded-lg border transition-all duration-200 shadow-md relative overflow-hidden flex items-center justify-between gap-3 ${isWon
+                          ? 'bg-slate-900/60 border-emerald-900/30 hover:border-emerald-500/50'
+                          : 'bg-slate-800/40 border-slate-700/50 hover:bg-slate-800/60 hover:border-blue-500/30'
+                        }`}
                     >
                       {/* Glow effect on hover */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
-                      
+
                       <div className="min-w-0">
                         <h4 className={`font-bold text-sm truncate ${isWon ? 'text-emerald-400' : 'text-slate-200'}`}>
                           {lead.companyName}
@@ -119,17 +118,17 @@ export const Dashboard: React.FC<DashboardProps> = ({ leads, onAddLead, onSelect
                       </div>
 
                       <div className="flex-shrink-0 flex items-center gap-2">
-                         {lead.problemType !== 'other' && !isWon && (
-                           <div className="text-amber-500/80 bg-amber-500/10 p-1 rounded" title={PROBLEM_LABELS[lead.problemType]}>
-                              <AlertTriangle className="w-3.5 h-3.5" />
-                           </div>
-                         )}
-                         {isWon && <CheckCircle2 className="w-4 h-4 text-emerald-500" />}
+                        {lead.problemType !== 'other' && !isWon && (
+                          <div className="text-amber-500/80 bg-amber-500/10 p-1 rounded" title={PROBLEM_LABELS[lead.problemType]}>
+                            <AlertTriangle className="w-3.5 h-3.5" />
+                          </div>
+                        )}
+                        {isWon && <CheckCircle2 className="w-4 h-4 text-emerald-500" />}
                       </div>
                     </motion.div>
                   ))}
                 </AnimatePresence>
-                
+
                 {columnLeads.length === 0 && (
                   <div className="h-24 flex flex-col items-center justify-center text-slate-600 border-2 border-dashed border-slate-800 rounded-xl opacity-50">
                     <span className="text-xs">Geen leads</span>
